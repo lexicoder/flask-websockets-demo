@@ -2,5 +2,10 @@ sudo: required
 language: generic
 services:
 - docker
+before_install:
+  - sudo apt-get update
 script:
-- docker build -t lexicoder/flask-websockets-demo .
+  - docker build -t lexicoder/flask-websockets-demo:latest .
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push lexicoder/flask-websockets-demo:latest
