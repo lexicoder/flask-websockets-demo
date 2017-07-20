@@ -1,0 +1,6 @@
+sudo: required
+services:
+- docker
+before_install:
+- cd $TRAVIS_BUILD_DIR
+- docker build -t flask-websockets-demo:latest
