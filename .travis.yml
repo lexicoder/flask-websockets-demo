@@ -3,5 +3,4 @@ language: generic
 services:
 - docker
 script:
-- cd $TRAVIS_BUILD_DIR
 - docker build -t lexicoder/flask-websockets-demo .
