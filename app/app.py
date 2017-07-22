@@ -1,22 +1,23 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sockets import Sockets
-
+import time
 
 app = Flask(__name__)
 sockets = Sockets(app)
 
+@app.route('/echo_test', methods=['GET'])
+def echo_test():
+    return render_template('echo_test.html')
+
+@app.route('/client_echo_test', methods=['GET'])
+def client_echo_test():
+    return render_template('client.html')
 
 @sockets.route('/echo')
 def echo_socket(ws):
     while not ws.closed:
         message = ws.receive()
-        ws.send(message)
-
-
-@app.route('/')
-def hello():
-    return 'Hello World!'
-
+        ws.send(message + ' ' + time.time())
 
 if __name__ == "__main__":
     from gevent import pywsgi
