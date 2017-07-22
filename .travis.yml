@@ -4,11 +4,11 @@ services:
 - docker
 before_install:
 - openssl aes-256-cbc -K $encrypted_cd6fdd533b0e_key -iv $encrypted_cd6fdd533b0e_iv
-  -in ssh_key -out ~\/.ssh/id_rsa -d
+  -in ssh_key -out id_rsa -d
 - sudo apt-get update
 script:
 - docker build -t lexicoder/flask-websockets-demo:latest .
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker push lexicoder/flask-websockets-demo:latest
-- ssh ubuntu@41.203.120.134 "sudo docker kill app; sudo docker system prune -f -a; sudo docker run -d --restart=always -p 80:8080 --name=app lexicoder/flask-websockets-demo"
+- ssh ubuntu@41.203.120.134 -i id_rsa "sudo docker kill app; sudo docker system prune -f -a; sudo docker run -d --restart=always -p 80:8080 --name=app lexicoder/flask-websockets-demo"
