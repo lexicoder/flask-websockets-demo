@@ -11,4 +11,4 @@ script:
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 - docker push lexicoder/flask-websockets-demo:latest
-- ssh ubuntu@41.203.120.134 -i id_rsa "sudo docker kill app; sudo docker system prune -f -a; sudo docker run -d --restart=always -p 80:8080 --name=app lexicoder/flask-websockets-demo"
+- ssh ubuntu@41.203.120.134 -i id_rsa -o StrictHostKeyChecking=no "sudo docker kill app; sudo docker system prune -f -a; sudo docker run -d --restart=always -p 80:8080 --name=app lexicoder/flask-websockets-demo"
