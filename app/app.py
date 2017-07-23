@@ -17,7 +17,7 @@ def client_echo_test():
 def echo_socket(ws):
     while not ws.closed:
         message = ws.receive()
-        ws.send(message + ' ' + time.time())
+        ws.send(message + ' ' + str(time.time()))
 
 if __name__ == "__main__":
     from gevent import pywsgi
