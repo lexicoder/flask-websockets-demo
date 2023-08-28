@@ -1,4 +1,4 @@
-FROM python:2.7.13
+FROM python:2.7.18
 WORKDIR /opt/
 EXPOSE 8080
 COPY app app
